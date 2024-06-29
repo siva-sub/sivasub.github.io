@@ -1,18 +1,18 @@
 main:
-  - name: 支持
-    identifier: support
+  - name: 沟通
+    identifier: communication
     weight: 100
-    url: https://github.com/hbstack
+    url: https://sivasub.com/
     params:
-      header: HB 支持社区。
+      header: 通过各种平台与我联系。
       icon:
         vendor: font-awesome-solid
-        name: headset
+        name: comments
 
   - name: 文档
-    identifier: support-docs
-    parent: support
-    url: https://hbstack.dev/
+    identifier: communication-docs
+    parent: communication
+    url: https://sivasub.com/
     weight: 1
     params:
       icon:
@@ -21,8 +21,8 @@ main:
       description: 使用文档。
 
   - name: GitHub
-    parent: support
-    url: https://github.com/hbstack
+    parent: communication
+    url: https://github.com/siva-sub
     weight: 2
     params:
       icon:
@@ -30,45 +30,35 @@ main:
         name: github
       description: 代码仓库。
 
-  - name: 讨论
-    parent: support
-    url: https://github.com/hbstack/discussions
+  - name: LinkedIn
+    parent: communication
+    url: https://www.linkedin.com/in/sivasub987/
     weight: 3
     params:
       icon:
-        vendor: font-awesome-regular
-        name: comments
-        color: green
-      description: 提问题和分享你的想法。
+        vendor: fab
+        name: linkedin
+        color: #0077b5
+      description: 在 LinkedIn 上与我联系。
 
-  - name: Bug 反馈
-    parent: support
-    url: https://github.com/hbstack/issues/new
+  - name: Gmail
+    parent: communication
+    url: mailto:Sivasub987@gmail.com
     weight: 4
     params:
       icon:
         vendor: font-awesome-solid
-        name: bug
-        color: red
-      description: 向我们反馈一个错误或问题。
+        name: envelope
+        color: #D44638
+      description: 给我发送电子邮件。
 
-  - name: 功能提议
-    parent: support
-    url: https://github.com/hbstack/issues/new
+  - name: WhatsApp
+    parent: communication
+    url: https://api.whatsapp.com/send?phone=6598272558&text=Hi%20Siva%20👋%2C%20I%20saw%20your%20profile%20and%20wanted%20to%20connect%20with%20you.
     weight: 5
     params:
       icon:
-        vendor: font-awesome-regular
-        name: lightbulb
-        color: orange
-      description: 建议新的或需要改进的功能。
-  
-  - name: Mastodon
-    parent: support
-    url: https://techhub.social/@hbstack
-    weight: 6
-    params:
-      icon:
-        vendor: simple
-        name: mastodon
-      description: 关注我们以获取最近消息。
+        vendor: font-awesome-brands
+        name: whatsapp
+        color: green
+      description: 在 WhatsApp 上与我联系。

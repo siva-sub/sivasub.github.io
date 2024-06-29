@@ -1,17 +1,17 @@
 main:
-  - name: Support
-    identifier: support
+  - name: Communication
+    identifier: communication
     weight: 100
-    url: https://github.com/hbstack
+    url: https://sivasub.com/
     params:
-      header: The HB support community.
+      header: Connect with me through various platforms.
       icon:
         vendor: font-awesome-solid
-        name: headset
+        name: comments
 
   - name: Documentation
-    parent: support
-    url: https://hbstack.dev/
+    parent: communication
+    url: https://sivasub.com/
     weight: 1
     params:
       icon:
@@ -21,8 +21,8 @@ main:
       description: The documentation.
 
   - name: GitHub
-    parent: support
-    url: https://github.com/hbstack
+    parent: communication
+    url: https://github.com/siva-sub
     weight: 11
     params:
       icon:
@@ -30,45 +30,35 @@ main:
         name: github
       description: The code repository.
 
-  - name: Discussion
-    parent: support
-    url: https://github.com/orgs/hbstack/discussions
+  - name: LinkedIn
+    parent: communication
+    url: https://www.linkedin.com/in/sivasub987/
     weight: 12
     params:
       icon:
-        vendor: font-awesome-regular
-        name: comments
-        color: green
-      description: Ask questions and share your ideas.
+        vendor: fab
+        name: linkedin
+        color: #0077b5
+      description: Connect with me on LinkedIn.
 
-  - name: Bug Report
-    parent: support
-    url: https://github.com/orgs/hbstack/discussions/new?category=issues-and-bugs
+  - name: Gmail
+    parent: communication
+    url: mailto:Sivasub987@gmail.com
     weight: 13
     params:
       icon:
         vendor: font-awesome-solid
-        name: bug
-        color: red
-      description: Tell us about a bug or issue.
+        name: envelope
+        color: #D44638
+      description: Send me an email.
 
-  - name: Feature Request
-    parent: support
-    url: https://github.com/orgs/hbstack/discussions/new?category=ideas
+  - name: WhatsApp
+    parent: communication
+    url: https://api.whatsapp.com/send?phone=6598272558&text=Hi%20Siva%20👋%2C%20I%20saw%20your%20profile%20and%20wanted%20to%20connect%20with%20you.
     weight: 14
     params:
       icon:
-        vendor: font-awesome-regular
-        name: lightbulb
-        color: orange
-      description: Suggest new or updated features.
-  
-  - name: Mastodon
-    parent: support
-    url: https://techhub.social/@hbstack
-    weight: 16
-    params:
-      icon:
-        vendor: simple
-        name: mastodon
-      description: Follow us on Mastodon to get latest updates.
+        vendor: font-awesome-brands
+        name: whatsapp
+        color: green
+      description: Contact me on WhatsApp for queries.
