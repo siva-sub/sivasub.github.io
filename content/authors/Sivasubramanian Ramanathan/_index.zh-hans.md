@@ -1,11 +1,12 @@
 ---
-title: HugoMods Authors
-description: HugoMods 代码和文档的贡献者
+title: Sivasubramanian Ramanathan
+description: Business Strategist | Singaporean
 images:
-  - https://avatars.githubusercontent.com/u/128204519?s=200&v=4
+  - https://www.sivasub.com/images/profile.jpg  # Update this URL with the actual profile image
 socials:
-  github: hugomods
-  paypal: razonyang
-  kofi: razonyang
-  gmail: mailto:support@hugomods.com
+  website: sivasub.com
+  github: siva-sub
+  linkedin: sivasub987
+  gmail: mailto:Sivasub987@gmail.com
+  phone: tel:+65-98272558
 ---
