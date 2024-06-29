@@ -10,7 +10,7 @@ categories:
 tags:
   - 特色图片
 authors:
-  - razonyang
+  - Sivasubramanian Ramanathan
 ---
 
 一篇带有特色图片的示例文章。

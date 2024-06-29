@@ -10,7 +10,7 @@ categories:
 tags:
   - Featured Image
 authors:
-  - razonyang
+  - Sivasubramanian Ramanathan
 ---
 
 The example post with an featured image.

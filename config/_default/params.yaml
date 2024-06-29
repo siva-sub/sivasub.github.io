@@ -1,4 +1,4 @@
-description: The starter theme template of HB (Hugo Bootstrap) Framework.
+description: Sivasubramanian Ramanathan's Blog and Portfolio.
 
 hb:
   # override SASS variables, please replace the dash with underline, e.g. `list-group-color` should be `list_group_color`.
@@ -11,22 +11,24 @@ hb:
   full_width: false # when true, the layout takes full width globally.
 
   header:
-    brand: HB # the brand name, leave it empty to use site's title.
-    logo_bg: '#712cf9' # logo background color, used by logo with transparent background.
+    brand: Sivasub # the brand name, leave it empty to use site's title.
+    logo_bg: 'transparent' # logo background color, used by logo with transparent background.
     # see https://hbstack.dev/en/docs/modules/socials/.
     socials:
-      github: hbstack
-      # twitter: razonyang
+      github: siva-sub
+      linkedin: sivasub987
+      whatsapp: https://api.whatsapp.com/send?phone=6598272558&text=Hi%20Siva%20👋%2C%20I%20saw%20your%20profile%20and%20wanted%20to%20connect%20with%20you.
+      gmail: mailto:Sivasub987@gmail.com
       rss: true
-      mastodon: https://techhub.social/@hbstack
   footer:
     # see https://hbstack.dev/en/docs/modules/socials/.
     socials:
       _color: true # when false, remove the color of social icons.
-      github: hbstack
-      twitter: razonyang
+      github: siva-sub
+      linkedin: sivasub987
+      whatsapp: https://api.whatsapp.com/send?phone=6598272558&text=Hi%20Siva%20👋%2C%20I%20saw%20your%20profile%20and%20wanted%20to%20connect%20with%20you.
+      gmail: mailto:Sivasub987@gmail.com
       rss: true
-      mastodon: https://techhub.social/@hbstack
   terms:
     # the paginate for categories, tags, series list pages.
     paginate: 12
@@ -35,11 +37,12 @@ hb:
       profile:
         # title: Profile title other than site title.
         # description: Profile description other than site description.
-        company: COMPANY
-        location: Earth
+        location: Singapore
         socials:
-          github: hbstack
-          mastodon: https://techhub.social/@hbstack
+          github: siva-sub
+          linkedin: sivasub987
+          whatsapp: https://api.whatsapp.com/send?phone=6598272558&text=Hi%20Siva%20👋%2C%20I%20saw%20your%20profile%20and%20wanted%20to%20connect%20with%20you.
+          gmail: mailto:Sivasub987@gmail.com
           rss: true
       posts:
         recent_count: 5 # the number of recent posts.
@@ -48,7 +51,7 @@ hb:
         count: true # whether to show the number of posts associated to the item.
         limit: 10 # the maximum number of the item.
     paginate: 12 # paginate.
-    post_thumbnail_placeholder: HB THEME # the text of thumbnail placeholder, default to site title.
+    post_thumbnail_placeholder: Sivasub Blog # the text of thumbnail placeholder, default to site title.
     # post_thumbnail: false # whether to show the thumbnails.
     # post_date_format: ":date_long" # see https://gohugo.io/functions/dateformat/#datetime-formatting-layouts.
     home: # homepage settings.
@@ -59,18 +62,20 @@ hb:
         - blog
         - tutorials
     giscus:
-      repo: hbstack/theme
-      repo_id: R_kgDOJP3qtA
-      category_id: DIC_kwDOJP3qtM4CVavM
+      repo: siva-sub/sivasub.github.io
+      repo_id: R_kgDOMKliZg
+      category: General
+      category_id: DIC_kwDOMKliZs4CgeJN
   docs:
     giscus:
-      repo: hbstack/theme
-      repo_id: R_kgDOJP3qtA
-      category_id: DIC_kwDOJP3qtM4CVavM
+      repo: siva-sub/sivasub.github.io
+      repo_id: R_kgDOMKliZg
+      category: General
+      category_id: DIC_kwDOMKliZs4CgeJN
   content_panel:
     repo:
       service: github # github or gitlab.
-      repo: hbstack/theme
+      repo: siva-sub/sivasub.github.io
       branch: main
       # subpath: exampleSite
   # gallery:
@@ -86,7 +91,7 @@ pwa:
   manifest:
     background_color: '#712cf9'
     theme_color: '#712cf9'
-    short_name: 'HB Theme'
+    short_name: 'Siva Blog'
 
 # see https://hugomods.com/search/configurations/.
 search:
