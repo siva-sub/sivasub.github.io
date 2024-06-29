@@ -51,8 +51,8 @@ imports:
   - path: github.com/hbstack/docs/modules/content-panel
 
   # other modules
-   - path: github.com/hugomods/google-analytics
-   - path: github.com/hugomods/microsoft-clarity
+  - path: github.com/hugomods/google-analytics
+  - path: github.com/hugomods/microsoft-clarity
 
   # recommended modules
   # check which modules were imported by recommended module by "hugo mod graph | grep recommended".
