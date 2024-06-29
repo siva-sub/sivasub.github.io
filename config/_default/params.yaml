@@ -89,8 +89,8 @@ seo:
 pwa:
   debug: false
   manifest:
-    background_color: '#712cf9'
-    theme_color: '#712cf9'
+    background_color: 'transparent'
+    theme_color: 'transparent'
     short_name: 'Siva Blog'
 
 # see https://hugomods.com/search/configurations/.
