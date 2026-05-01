@@ -12,9 +12,9 @@
   ],
   "github_pages_path": "/home/ubuntu/sivasub.github.io/agentic-payment-authority/index.html",
   "expected_url": "https://siva-sub.github.io/sivasub.github.io/agentic-payment-authority/",
-  "gate_type": "learning_gate_localStorage_no_email_capture",
-  "status": "published_to_github_pages_verified_200",
-  "verified_at": "2026-05-01T14:48:08",
+  "gate_type": "none_removed_no_prompt_overlay",
+  "status": "published_to_github_pages_verified_200_buttons_working_no_gate_leak",
+  "verified_at": "2026-05-01T16:39:58.223870+00:00",
   "version": "3.1-no-gate-hardened-buttons",
   "updated_at": "2026-05-01T16:33:18.965507+00:00",
   "design_notes": [
