@@ -1,12 +1,9 @@
 name: GitHub Pages
 
 on:
-  # auto deploy when pushing to specified branches.
   push:
     branches:
       - main
-
-  # allow deploying manually.
   workflow_dispatch:
 
 permissions:
@@ -28,37 +25,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: "0.148.2"
-          extended: true
-
-      - name: Install Node.js dependencies
-        run: npm ci
-
-      - name: Build with Hugo
-        env:
-          HUGO_ENVIRONMENT: production
-          HUGO_ENV: production
+      - name: Build static microsite artifact
         run: |
-          hugo \
-            --gc \
-            --enableGitInfo \
-            --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+          rm -rf public
+          mkdir -p public
+          cp -R agentic-payment-authority public/agentic-payment-authority
+          printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=./agentic-payment-authority/"><title>Learn with Siva</title><a href="./agentic-payment-authority/">Delegated Payment Authority Lab</a>' > public/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
