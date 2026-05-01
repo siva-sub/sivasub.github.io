@@ -15,12 +15,14 @@
   "gate_type": "learning_gate_localStorage_no_email_capture",
   "status": "published_to_github_pages_verified_200",
   "verified_at": "2026-05-01T14:48:08",
-  "version": "2.0-lucide-brand-refresh",
-  "updated_at": "2026-05-01T15:03:15.329251+00:00",
+  "version": "3.0-research-backed-authority-stack",
+  "updated_at": "2026-05-01T16:05:28.812186+00:00",
   "design_notes": [
-    "Learn with Siva brand tokens",
-    "Lucide icon system",
-    "Inspired by ISO 20022 flow simulator and ISO 8583 dense parser playground",
-    "Learning gate via localStorage"
-  ]
+    "research-backed authority stack simulator",
+    "primary sources: Stripe Visa Mastercard Google BIS FSB",
+    "Lucide icons",
+    "full-canvas SVG stack with semantic nodes/connectors"
+  ],
+  "research_file": "/home/ubuntu/post-structures/content-outputs/2026-05-01-agentic-payment-authority/RESEARCH.md",
+  "notebooklm_notebook_id": "68e1521d-3e75-4b32-8dcf-f575a9ccf1fa"
 }
