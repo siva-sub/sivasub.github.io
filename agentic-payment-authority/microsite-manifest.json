@@ -15,8 +15,8 @@
   "gate_type": "learning_gate_localStorage_no_email_capture",
   "status": "published_to_github_pages_verified_200",
   "verified_at": "2026-05-01T14:48:08",
-  "version": "3.0-research-backed-authority-stack",
-  "updated_at": "2026-05-01T16:05:28.812186+00:00",
+  "version": "3.1-no-gate-hardened-buttons",
+  "updated_at": "2026-05-01T16:33:18.965507+00:00",
   "design_notes": [
     "research-backed authority stack simulator",
     "primary sources: Stripe Visa Mastercard Google BIS FSB",
@@ -24,5 +24,10 @@
     "full-canvas SVG stack with semantic nodes/connectors"
   ],
   "research_file": "/home/ubuntu/post-structures/content-outputs/2026-05-01-agentic-payment-authority/RESEARCH.md",
-  "notebooklm_notebook_id": "68e1521d-3e75-4b32-8dcf-f575a9ccf1fa"
+  "notebooklm_notebook_id": "68e1521d-3e75-4b32-8dcf-f575a9ccf1fa",
+  "fixes": [
+    "removed public learning gate/prompt-like overlay",
+    "replaced fragile inline click handlers with event delegation",
+    "removed prompt-like gate residue from static HTML"
+  ]
 }
