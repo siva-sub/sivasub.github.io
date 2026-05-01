@@ -14,5 +14,13 @@
   "expected_url": "https://siva-sub.github.io/sivasub.github.io/agentic-payment-authority/",
   "gate_type": "learning_gate_localStorage_no_email_capture",
   "status": "published_to_github_pages_verified_200",
-  "verified_at": "2026-05-01T14:48:09"
+  "verified_at": "2026-05-01T14:48:08",
+  "version": "2.0-lucide-brand-refresh",
+  "updated_at": "2026-05-01T15:03:15.329251+00:00",
+  "design_notes": [
+    "Learn with Siva brand tokens",
+    "Lucide icon system",
+    "Inspired by ISO 20022 flow simulator and ISO 8583 dense parser playground",
+    "Learning gate via localStorage"
+  ]
 }

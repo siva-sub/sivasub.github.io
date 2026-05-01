@@ -4,124 +4,174 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Delegated Payment Authority Lab | Learn with Siva</title>
-  <meta name="description" content="An interactive Learn with Siva microsite explaining why AI-agent payments need delegated authority, credential controls, liability rules, and settlement choices." />
+  <meta name="description" content="A Learn with Siva microsite explaining how AI-agent payments need delegated authority, scoped credentials, liability rules, and settlement choices before they touch a rail." />
   <meta property="og:title" content="Delegated Payment Authority Lab" />
   <meta property="og:description" content="AI-agent payments are not only a rail choice. They are an authority, credential, liability, and settlement design choice." />
   <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800;9..40,900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
   <style>
-    :root{--bg:#F5F0EB;--ink:#1A2634;--muted:#617084;--card:#FFFAF6;--line:#D8C8BC;--copper:#C19A8A;--blue:#0277BD;--green:#177245;--amber:#B7791F;--red:#A23B3B;--shadow:10px 10px 0 rgba(26,38,52,.10)}
-    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45} a{color:inherit}
-    .shell{max-width:1180px;margin:0 auto;padding:34px 22px 80px}.nav{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:34px}.brand{display:flex;gap:12px;align-items:center;font-weight:900}.mark{width:42px;height:42px;border:3px solid var(--ink);border-radius:14px;background:#fff;display:grid;place-items:center;box-shadow:4px 4px 0 rgba(26,38,52,.12)}.navlinks{display:flex;gap:10px;flex-wrap:wrap}.pill{border:2px solid var(--ink);background:#fff;border-radius:999px;padding:9px 13px;font-weight:850;text-decoration:none;box-shadow:3px 3px 0 rgba(26,38,52,.08)}
-    .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:26px;align-items:stretch}.hero-card,.panel,.lab-card,.source-card{background:var(--card);border:3px solid var(--ink);border-radius:28px;box-shadow:var(--shadow)}.hero-card{padding:34px}.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);font-weight:950}.hero h1{font-size:clamp(42px,7vw,76px);line-height:.92;letter-spacing:-.06em;margin:12px 0}.dek{font-size:20px;color:var(--muted);max-width:780px}.hero-list{display:grid;gap:12px;margin-top:22px}.hero-list div{display:flex;gap:11px;align-items:flex-start}.dot{width:12px;height:12px;border-radius:50%;background:var(--copper);border:2px solid var(--ink);margin-top:6px;flex:0 0 auto}.mini-stack{padding:24px;display:grid;gap:14px}.stack-row{border:2px solid var(--ink);border-radius:22px;background:#fff;padding:16px;display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:center}.stack-row b{display:block}.stack-row span{color:var(--muted);font-size:14px}.num{width:42px;height:42px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-weight:950;background:#F7E7DF}.section{margin-top:34px}.section h2{font-size:clamp(28px,4vw,46px);letter-spacing:-.04em;line-height:1;margin:0 0 14px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.lab-card{padding:22px}.lab-card h3{margin:0 0 8px;font-size:22px}.lab-card p{color:var(--muted);margin:0}.lab-card.active{background:#F7E7DF;outline:4px solid var(--copper)}
-    .sim{display:grid;grid-template-columns:1fr .82fr;gap:20px}.sim-controls{display:grid;gap:12px}.choice{border:2px solid var(--ink);background:#fff;border-radius:18px;padding:15px;text-align:left;font:inherit;box-shadow:4px 4px 0 rgba(26,38,52,.08);cursor:pointer}.choice b{display:block}.choice span{display:block;color:var(--muted);font-size:14px}.choice.active{background:#F7E7DF;border-color:var(--copper)}.result{padding:22px}.meters{display:grid;gap:14px;margin-top:14px}.meter label{display:flex;justify-content:space-between;font-weight:850;font-size:14px}.bar{height:16px;border:2px solid var(--ink);background:#fff;border-radius:999px;overflow:hidden}.bar i{display:block;height:100%;background:var(--copper);width:50%}.risk-list{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:9px}.risk-list li{background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px}.map{background:#fff;border:3px solid var(--ink);border-radius:28px;box-shadow:var(--shadow);padding:20px;overflow:hidden}.flow-svg{width:100%;height:auto;min-height:390px}.node circle{fill:#fff;stroke:var(--ink);stroke-width:4}.node text{font-weight:900;fill:var(--ink)}.edge{stroke:var(--ink);stroke-width:4;stroke-linecap:round;opacity:.18}.edge.active{opacity:1;stroke:var(--copper)}.node.inactive{opacity:.15}.node.active circle{fill:#F7E7DF;stroke:var(--copper);stroke-width:6}.callout{fill:#fff;stroke:var(--ink);stroke-width:2}.callout-text{font-size:13px;font-weight:850}.source-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.source-card{padding:20px}.source-card h3{margin:0 0 8px}.source-card ul{margin:0;padding-left:20px;color:var(--muted)}.footer{margin-top:44px;padding-top:24px;border-top:2px solid var(--line);color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .gate{position:fixed;inset:0;background:rgba(245,240,235,.96);z-index:20;display:grid;place-items:center;padding:22px}.gate.hidden{display:none}.gate-card{max-width:680px;background:var(--card);border:3px solid var(--ink);border-radius:30px;box-shadow:14px 14px 0 rgba(26,38,52,.16);padding:30px}.gate-card h2{font-size:38px;line-height:1;letter-spacing:-.04em;margin:8px 0 12px}.gate-card p{color:var(--muted);font-size:18px}.gate-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}.btn{border:3px solid var(--ink);background:var(--ink);color:#fff;border-radius:999px;padding:12px 18px;font-weight:900;cursor:pointer}.btn.secondary{background:#fff;color:var(--ink)}
-    @media(max-width:860px){.hero,.sim,.source-grid{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}.hero-card{padding:24px}.nav{align-items:flex-start;flex-direction:column}.flow-svg{min-height:300px}.section h2{font-size:34px;letter-spacing:-.025em;padding-left:2px;overflow:visible}.shell{padding-left:24px;padding-right:24px}}
+    :root{
+      --canvas:#F5F0EB; --canvas-alt:#EDE5DC; --surface:#FFFFFF; --surface-warm:#FAF7F4;
+      --ink:#1A2634; --ink-2:#3D4A5C; --muted:#5E6D7E; --faint:#9AA5B1;
+      --line:#D4C4B8; --line-soft:#E8DED4; --copper:#C19A8A; --plum:#9B7B9E;
+      --blue:#0277BD; --green:#2E7D32; --amber:#EF6C00; --red:#C62828;
+      --shadow:0 22px 60px rgba(26,38,52,.10); --shadow-hard:7px 7px 0 rgba(26,38,52,.10);
+      --radius:26px; --radius-sm:16px; --mono:'JetBrains Mono',ui-monospace,monospace;
+      --heading:'DM Sans',Inter,system-ui,sans-serif; --body:Inter,system-ui,sans-serif;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased} body:before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(26,38,52,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(26,38,52,.045) 1px,transparent 1px);background-size:60px 60px;pointer-events:none} a{color:inherit} button{font:inherit;color:inherit}
+    .shell{position:relative;max-width:1220px;margin:0 auto;padding:24px 20px 74px}.nav{position:sticky;top:14px;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:12px 14px;border:1px solid rgba(212,196,184,.75);border-radius:24px;background:rgba(250,247,244,.78);backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(26,38,52,.06)}.brand{display:flex;gap:12px;align-items:center}.brand-mark{width:46px;height:46px;border:2px solid var(--ink);border-radius:15px;background:#fff;display:grid;place-items:center;box-shadow:var(--shadow-hard);font-weight:900}.brand-title{font-family:var(--heading);font-weight:900;letter-spacing:-.03em}.brand-sub{display:block;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:0}.navlinks{display:flex;gap:8px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;text-decoration:none;font-size:13px;font-weight:800}.pill .lucide{width:15px;height:15px;color:var(--copper)}
+    .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:22px;align-items:stretch;margin-top:24px}.card{background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.hero-main{position:relative;padding:34px;min-height:535px;display:flex;flex-direction:column;justify-content:space-between;background:radial-gradient(circle at 15% 10%,rgba(193,154,138,.34),transparent 28%),linear-gradient(140deg,#fff 0%,#FAF7F4 62%,#F2E8E0 100%)}.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:800}.hero h1{font-family:var(--heading);font-size:clamp(48px,7vw,84px);line-height:.88;letter-spacing:-.075em;margin:14px 0 18px;max-width:860px}.dek{font-size:20px;color:var(--muted);max-width:760px;margin:0}.hero-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:26px}.mini{border:1px solid var(--line-soft);border-radius:18px;background:rgba(255,255,255,.82);padding:15px;display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:start}.mini .icon,.node-icon,.metric-icon{width:38px;height:38px;border-radius:13px;background:var(--ink);color:#fff;display:grid;place-items:center}.mini .icon .lucide,.node-icon .lucide,.metric-icon .lucide{width:19px;height:19px}.mini b{display:block;font-family:var(--heading);letter-spacing:-.02em}.mini span{display:block;color:var(--muted);font-size:13px}.hero-aside{padding:20px;display:flex;flex-direction:column;gap:14px;background:var(--ink);color:#fff}.aside-card{border:1px solid rgba(255,255,255,.14);border-radius:22px;background:rgba(255,255,255,.075);padding:18px}.aside-card h2{font-family:var(--heading);font-size:28px;line-height:1;letter-spacing:-.04em;margin:8px 0}.ledger{display:grid;gap:10px;margin-top:12px}.ledger-row{display:grid;grid-template-columns:86px 1fr auto;gap:10px;align-items:center;font-family:var(--mono);font-size:12px}.ledger-row span:first-child{color:rgba(255,255,255,.55)}.status{padding:4px 8px;border-radius:999px;background:rgba(193,154,138,.18);color:#F0D1C5;border:1px solid rgba(193,154,138,.42);font-weight:800}.thesis{margin-top:auto;border-color:rgba(193,154,138,.40);background:rgba(193,154,138,.13)}.thesis p{font-size:18px;margin:0;color:rgba(255,255,255,.88)}
+    .section{margin-top:28px}.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:14px}.section h2{font-family:var(--heading);font-size:clamp(34px,4vw,52px);line-height:.95;letter-spacing:-.055em;margin:0}.section .lead{color:var(--muted);max-width:640px;margin:0}.lab{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(330px,.85fr);gap:20px}.flow-card{padding:20px}.flow-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.tool-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:9px 12px;font-weight:800;cursor:pointer}.tool-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}.tool-btn .lucide{width:16px;height:16px}.flow-wrap{background:linear-gradient(180deg,#fff,#FAF7F4);border:1px solid var(--line-soft);border-radius:22px;overflow:auto}.flow-svg{display:block;width:100%;min-width:700px;height:auto}.flow-line{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:.18}.flow-line.live{opacity:1;stroke:var(--copper);stroke-width:4}.flow-line.warning{stroke:var(--amber);opacity:.7}.flow-node rect{fill:#fff;stroke:var(--ink);stroke-width:2.5}.flow-node .node-title{font:800 16px var(--heading);fill:var(--ink)}.flow-node .node-sub{font:700 11px var(--mono);fill:var(--muted)}.flow-node.active rect{stroke:var(--copper);stroke-width:4;fill:#FFF5EF}.flow-node.dim{opacity:.15}.svg-badge{fill:var(--ink)}.svg-badge-text{font:800 11px var(--mono);fill:#fff}.flow-note{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;margin-top:14px;padding:14px;border:1px dashed var(--line);border-radius:18px;background:#fff}.flow-note p{margin:0;color:var(--muted)}.panel{padding:20px}.panel h3{font-family:var(--heading);font-size:30px;line-height:1;margin:6px 0 8px;letter-spacing:-.04em}.choice-list{display:grid;gap:10px;margin:18px 0}.choice{display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:start;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff;text-align:left;cursor:pointer}.choice.active{border-color:var(--ink);box-shadow:var(--shadow-hard);background:#FFF5EF}.choice b{display:block}.choice span{display:block;color:var(--muted);font-size:13px}.choice .lucide{width:20px;height:20px}.metrics{display:grid;gap:12px}.metric{padding:12px;border:1px solid var(--line-soft);border-radius:16px;background:var(--surface-warm)}.metric label{display:flex;justify-content:space-between;font-weight:850;font-size:13px}.bar{height:12px;margin-top:8px;border:1px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden}.bar i{display:block;height:100%;width:50%;background:linear-gradient(90deg,var(--copper),var(--plum))}.risk-list{display:grid;gap:9px;margin:14px 0 0;padding:0;list-style:none}.risk-list li{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;color:var(--muted);font-size:14px}.risk-list .lucide{width:17px;height:17px;color:var(--amber);margin-top:2px}
+    .framework-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.frame{padding:18px;border-top:5px solid var(--copper)}.frame:nth-child(2){border-top-color:var(--blue)}.frame:nth-child(3){border-top-color:var(--plum)}.frame:nth-child(4){border-top-color:var(--green)}.frame .metric-icon{background:var(--surface-warm);color:var(--ink);border:1px solid var(--line);margin-bottom:14px}.frame h3{font-family:var(--heading);font-size:22px;letter-spacing:-.025em;margin:0 0 8px}.frame p{color:var(--muted);margin:0}.compare{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.rail{padding:18px}.rail-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.rail-top h3{font-family:var(--heading);font-size:24px;letter-spacing:-.03em;margin:0}.rail .lucide{width:24px;height:24px;color:var(--copper)}.rail dl{display:grid;gap:10px;margin:16px 0 0}.rail div{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line-soft);padding-top:10px}.rail dt{font-weight:800}.rail dd{margin:0;color:var(--muted);text-align:right}.sources{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.source-card{padding:20px}.source-card h3{font-family:var(--heading);font-size:24px;margin:0 0 10px;letter-spacing:-.025em}.source-card ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}.source-card li{display:grid;grid-template-columns:24px 1fr;gap:8px;color:var(--muted)}.source-card .lucide{width:17px;height:17px;color:var(--green);margin-top:3px}.footer{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:32px;padding:20px 0 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    .gate{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:20px;background:rgba(245,240,235,.96);backdrop-filter:blur(12px)}.gate.hidden{display:none}.gate-card{max-width:730px;padding:28px;background:#fff;border:1px solid var(--line);border-radius:30px;box-shadow:0 30px 90px rgba(26,38,52,.18)}.gate-row{display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:start}.gate-icon{width:56px;height:56px;border-radius:18px;background:var(--ink);color:#fff;display:grid;place-items:center;box-shadow:var(--shadow-hard)}.gate-icon .lucide{width:28px;height:28px}.gate-card h2{font-family:var(--heading);font-size:42px;line-height:.96;letter-spacing:-.05em;margin:8px 0 10px}.gate-card p{color:var(--muted);font-size:17px}.gate-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:999px;padding:12px 16px;font-weight:900;cursor:pointer;text-decoration:none}.btn.secondary{background:#fff;color:var(--ink);border-color:var(--line)}.btn .lucide{width:18px;height:18px}
+    @media(max-width:960px){.hero,.lab,.sources{grid-template-columns:1fr}.hero-aside{min-height:auto}.framework-grid,.compare{grid-template-columns:repeat(2,minmax(0,1fr))}.section-head{display:block}.section .lead{margin-top:8px}.nav{align-items:flex-start;flex-direction:column}.hero-main{min-height:auto}}
+    @media(max-width:640px){.shell{padding:14px 14px 58px}.hero-grid,.framework-grid,.compare{grid-template-columns:1fr}.hero-main{padding:24px}.hero h1{font-size:48px;letter-spacing:-.055em}.dek{font-size:17px}.gate-row{grid-template-columns:1fr}.gate-card h2{font-size:34px}.flow-svg{min-width:620px}.navlinks{width:100%}.pill{flex:1;justify-content:center}.ledger-row{grid-template-columns:74px 1fr}.section h2{font-size:36px}}
   </style>
 </head>
 <body>
-  <div class="gate" id="gate">
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
     <div class="gate-card">
-      <div class="eyebrow">Learn with Siva gated microsite</div>
-      <h2>Before the simulator, take the mental model.</h2>
-      <p>This is not a lead-capture form. The GitHub version uses a learning gate: read the framing, then enter the lab. Email/newsletter capture can be wired later if needed.</p>
-      <p><strong>Rule:</strong> an AI agent payment is not just “which rail?” It is authority, credential, liability, and settlement.</p>
-      <div class="gate-actions">
-        <button class="btn" id="enterBtn">Enter the lab</button>
-        <a class="btn secondary" href="#sources">View source trail first</a>
+      <div class="gate-row">
+        <div class="gate-icon"><i data-lucide="lock-keyhole"></i></div>
+        <div>
+          <div class="eyebrow">Learn with Siva learning gate</div>
+          <h2 id="gateTitle">Take the mental model before the simulator.</h2>
+          <p>This is not a lead-capture form. The GitHub version uses a learning gate so the lab starts with the right frame.</p>
+          <p><strong>Rule:</strong> an AI agent payment is authority first, credential second, rail third.</p>
+          <div class="gate-actions">
+            <button class="btn" id="enterBtn"><i data-lucide="unlock"></i>Enter the lab</button>
+            <a class="btn secondary" href="#sources"><i data-lucide="book-open"></i>View source trail first</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
   <main class="shell">
     <nav class="nav">
-      <div class="brand"><div class="mark">☤</div><div>Learn with Siva<br><span style="color:var(--muted);font-weight:700">Payments infrastructure explained</span></div></div>
-      <div class="navlinks"><a class="pill" href="#lab">Simulator</a><a class="pill" href="#framework">Framework</a><a class="pill" href="#sources">Sources</a></div>
+      <div class="brand"><div class="brand-mark">☤</div><div><div class="brand-title">Learn with Siva</div><span class="brand-sub">Payments infrastructure explained</span></div></div>
+      <div class="navlinks"><a class="pill" href="#lab"><i data-lucide="route"></i>Lab</a><a class="pill" href="#framework"><i data-lucide="layers-3"></i>Framework</a><a class="pill" href="#rails"><i data-lucide="landmark"></i>Rails</a><a class="pill" href="#sources"><i data-lucide="library"></i>Sources</a></div>
     </nav>
-
     <section class="hero">
-      <div class="hero-card">
-        <div class="eyebrow">AI-agent payments</div>
-        <h1>An AI agent cannot just “pay”.</h1>
-        <p class="dek">Before it buys anything, the payment system has to decide what the agent is allowed to do, which credential it can use, and who carries the risk when something goes wrong.</p>
-        <div class="hero-list">
-          <div><span class="dot"></span><span><strong>Authority:</strong> who delegated the instruction, and under what limit?</span></div>
-          <div><span class="dot"></span><span><strong>Credential:</strong> card token, bank rail, or stablecoin wallet?</span></div>
-          <div><span class="dot"></span><span><strong>Liability:</strong> who owns fraud, refund, dispute, and compliance outcomes?</span></div>
+      <div class="card hero-main">
+        <div>
+          <div class="eyebrow">Delegated payment authority</div>
+          <h1>An AI agent cannot just “pay”.</h1>
+          <p class="dek">Before value moves, the system needs to know what the agent is allowed to do, which credential it may use, who absorbs failure, and when settlement is actually final.</p>
+        </div>
+        <div class="hero-grid">
+          <div class="mini"><div class="icon"><i data-lucide="user-check"></i></div><div><b>Authority</b><span>Human intent converted into a bounded permission.</span></div></div>
+          <div class="mini"><div class="icon"><i data-lucide="credit-card"></i></div><div><b>Credential</b><span>Token, account access, wallet key, or scheme-issued proxy.</span></div></div>
+          <div class="mini"><div class="icon"><i data-lucide="scale"></i></div><div><b>Liability</b><span>Fraud, disputes, refunds, compliance holds, and user recourse.</span></div></div>
+          <div class="mini"><div class="icon"><i data-lucide="badge-check"></i></div><div><b>Settlement</b><span>Ledger update, legal finality, redemption, and reversibility.</span></div></div>
         </div>
       </div>
-      <aside class="mini-stack hero-card" aria-label="Delegated authority stack">
-        <div class="stack-row"><div class="num">1</div><div><b>User instruction</b><span>The human asks the agent to act.</span></div></div>
-        <div class="stack-row"><div class="num">2</div><div><b>Agent policy</b><span>Limits translate intent into permission.</span></div></div>
-        <div class="stack-row"><div class="num">3</div><div><b>Payment credential</b><span>The system chooses how value moves.</span></div></div>
-        <div class="stack-row"><div class="num">4</div><div><b>Risk model</b><span>Fraud, refunds, disputes, holds, and settlement.</span></div></div>
+      <aside class="card hero-aside">
+        <div class="aside-card">
+          <div class="eyebrow">Authority ledger</div>
+          <h2>Scope before movement.</h2>
+          <div class="ledger">
+            <div class="ledger-row"><span>actor</span><strong>shopping-agent-17</strong><em class="status">bounded</em></div>
+            <div class="ledger-row"><span>limit</span><strong>S$250 / merchant</strong><em class="status">active</em></div>
+            <div class="ledger-row"><span>rail</span><strong>network token</strong><em class="status">scoped</em></div>
+            <div class="ledger-row"><span>recourse</span><strong>refund + chargeback</strong><em class="status">visible</em></div>
+          </div>
+        </div>
+        <div class="aside-card thesis">
+          <p>The interesting question is not whether agents use cards, bank rails, or stablecoins. It is where the payment stack records delegated authority, and which institution is willing to stand behind it.</p>
+        </div>
       </aside>
     </section>
-
-    <section id="framework" class="section">
-      <h2>The mechanism</h2>
-      <div class="grid-3">
-        <article class="lab-card active"><h3>Card token</h3><p>Useful when acceptance, network rules, chargebacks, and fraud controls matter more than programmability.</p></article>
-        <article class="lab-card"><h3>Bank rail</h3><p>Useful when regulated account movement, account ownership, and PSP controls are the centre of the payment.</p></article>
-        <article class="lab-card"><h3>Stablecoin wallet</h3><p>Useful when programmable transfer and settlement-asset design matter, but redemption and compliance remain live questions.</p></article>
+    <section id="lab" class="section lab">
+      <div class="card flow-card">
+        <div class="section-head"><div><div class="eyebrow">Interactive mechanism map</div><h2>Follow the constraint</h2></div><p class="lead">The reference microsites use flow simulation, tabs, and evidence panels. This version uses the same pattern for agentic payments: pick a use case and watch which part of the stack becomes sensitive.</p></div>
+        <div class="flow-tools" role="tablist" aria-label="Use case selector">
+          <button class="tool-btn active" data-scenario="retail"><i data-lucide="shopping-bag"></i>Retail agent</button>
+          <button class="tool-btn" data-scenario="travel"><i data-lucide="plane"></i>Travel agent</button>
+          <button class="tool-btn" data-scenario="treasury"><i data-lucide="coins"></i>Treasury bot</button>
+        </div>
+        <div class="flow-wrap">
+          <svg class="flow-svg" viewBox="0 0 860 480" role="img" aria-label="Delegated authority flow from user intent to settlement">
+            <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#1A2634"/></marker></defs>
+            <path class="flow-line live" data-from="user" data-to="policy" d="M150 150 C220 94 300 94 370 150" marker-end="url(#arrow)"/>
+            <path class="flow-line live" data-from="policy" data-to="credential" d="M490 150 C560 94 635 94 710 150" marker-end="url(#arrow)"/>
+            <path class="flow-line live" data-from="credential" data-to="rail" d="M725 235 C705 300 625 340 520 342" marker-end="url(#arrow)"/>
+            <path class="flow-line warning" data-from="rail" data-to="liability" d="M370 342 C260 338 170 300 145 235" marker-end="url(#arrow)"/>
+            <path class="flow-line" data-from="liability" data-to="user" d="M115 202 C80 250 80 310 130 346" marker-end="url(#arrow)"/>
+            <g class="flow-node active" data-node="user" transform="translate(70 105)"><rect width="150" height="96" rx="22"/><text class="node-title" x="75" y="38" text-anchor="middle">User</text><text class="node-sub" x="75" y="64" text-anchor="middle">intent + consent</text></g>
+            <g class="flow-node active" data-node="policy" transform="translate(355 105)"><rect width="150" height="96" rx="22"/><text class="node-title" x="75" y="38" text-anchor="middle">Policy</text><text class="node-sub" x="75" y="64" text-anchor="middle" id="svgPolicy">merchant cap</text></g>
+            <g class="flow-node active" data-node="credential" transform="translate(640 105)"><rect width="150" height="96" rx="22"/><text class="node-title" x="75" y="38" text-anchor="middle">Credential</text><text class="node-sub" x="75" y="64" text-anchor="middle" id="svgCredential">network token</text></g>
+            <g class="flow-node" data-node="rail" transform="translate(355 300)"><rect width="150" height="96" rx="22"/><text class="node-title" x="75" y="38" text-anchor="middle">Rail</text><text class="node-sub" x="75" y="64" text-anchor="middle" id="svgRail">card network</text></g>
+            <g class="flow-node" data-node="liability" transform="translate(70 300)"><rect width="150" height="96" rx="22"/><text class="node-title" x="75" y="38" text-anchor="middle">Liability</text><text class="node-sub" x="75" y="64" text-anchor="middle" id="svgLiability">chargeback path</text></g>
+            <rect class="svg-badge" x="270" y="425" width="320" height="34" rx="17"/><text class="svg-badge-text" x="430" y="447" text-anchor="middle" id="svgBadge">Rail choice is downstream of authority design</text>
+          </svg>
+        </div>
+        <div class="flow-note"><div class="metric-icon"><i data-lucide="lightbulb"></i></div><p id="scenarioNote">A retail agent usually starts with credential controls: merchant category, amount cap, refund path, and token scope.</p></div>
       </div>
-    </section>
-
-    <section id="lab" class="section sim">
-      <div class="map">
-        <svg class="flow-svg" viewBox="0 0 720 460" role="img" aria-label="Delegated payment authority flow">
-          <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#1A2634"/></marker></defs>
-          <path class="edge active" d="M110 120 C180 80, 250 80, 320 120" marker-end="url(#arrow)"/>
-          <path class="edge active" d="M400 120 C470 80, 540 80, 610 120" marker-end="url(#arrow)"/>
-          <path class="edge active" d="M610 190 C600 260, 500 300, 410 310" marker-end="url(#arrow)"/>
-          <path class="edge" d="M320 310 C240 300, 150 260, 110 190" marker-end="url(#arrow)"/>
-          <g class="node active" transform="translate(110 155)"><circle r="48"/><text text-anchor="middle" y="-3" font-size="18">User</text><text text-anchor="middle" y="22" font-size="12">instruction</text></g>
-          <g class="node active" transform="translate(360 155)"><circle r="58"/><text text-anchor="middle" y="-4" font-size="18">Policy</text><text text-anchor="middle" y="22" font-size="12">delegation</text></g>
-          <g class="node active" transform="translate(610 155)"><circle r="54"/><text text-anchor="middle" y="-4" font-size="18">Credential</text><text text-anchor="middle" y="22" font-size="12">rail choice</text></g>
-          <g class="node" transform="translate(360 330)"><circle r="58"/><text text-anchor="middle" y="-4" font-size="18">Risk</text><text text-anchor="middle" y="22" font-size="12">liability</text></g>
-          <rect class="callout" x="145" y="390" width="430" height="42" rx="16"/><text class="callout-text" x="360" y="416" text-anchor="middle">The rail changed. The constraint moved.</text>
-        </svg>
-      </div>
-      <div class="panel result">
+      <div class="card panel">
         <div class="eyebrow">Credential simulator</div>
-        <h2 id="choiceTitle">Card token</h2>
-        <p id="choiceText" style="color:var(--muted)">Best first fit when the agent needs existing merchant acceptance, spending controls, chargeback paths, and network fraud rules.</p>
-        <div class="sim-controls" role="tablist" aria-label="Credential choices">
-          <button class="choice active" data-choice="card"><b>Card token</b><span>Acceptance, disputes, fraud rules</span></button>
-          <button class="choice" data-choice="bank"><b>Bank rail</b><span>Account movement and PSP controls</span></button>
-          <button class="choice" data-choice="stablecoin"><b>Stablecoin wallet</b><span>Programmable transfer and redemption design</span></button>
+        <h3 id="choiceTitle">Card token</h3>
+        <p id="choiceText" style="color:var(--muted);margin-top:0">Best first fit when the agent needs existing merchant acceptance, spending controls, chargeback paths, and network fraud rules.</p>
+        <div class="choice-list" role="tablist" aria-label="Credential choices">
+          <button class="choice active" data-choice="card"><div class="node-icon"><i data-lucide="credit-card"></i></div><div><b>Card token</b><span>Acceptance, disputes, network fraud rules</span></div></button>
+          <button class="choice" data-choice="bank"><div class="node-icon"><i data-lucide="landmark"></i></div><div><b>Bank rail</b><span>Account movement and PSP controls</span></div></button>
+          <button class="choice" data-choice="stablecoin"><div class="node-icon"><i data-lucide="coins"></i></div><div><b>Stablecoin wallet</b><span>Programmable transfer and redemption design</span></div></button>
         </div>
-        <div class="meters">
-          <div class="meter"><label><span>Merchant acceptance</span><span id="m1v">High</span></label><div class="bar"><i id="m1" style="width:86%"></i></div></div>
-          <div class="meter"><label><span>Programmability</span><span id="m2v">Medium</span></label><div class="bar"><i id="m2" style="width:48%"></i></div></div>
-          <div class="meter"><label><span>Dispute path clarity</span><span id="m3v">High</span></label><div class="bar"><i id="m3" style="width:82%"></i></div></div>
+        <div class="metrics">
+          <div class="metric"><label><span>Merchant acceptance</span><span id="m1v">High</span></label><div class="bar"><i id="m1" style="width:86%"></i></div></div>
+          <div class="metric"><label><span>Programmability</span><span id="m2v">Medium</span></label><div class="bar"><i id="m2" style="width:48%"></i></div></div>
+          <div class="metric"><label><span>Dispute path clarity</span><span id="m3v">High</span></label><div class="bar"><i id="m3" style="width:82%"></i></div></div>
         </div>
-        <ul class="risk-list" id="riskList"><li>Set merchant category and amount caps before the credential is provisioned.</li><li>Use network token controls instead of exposing the underlying PAN.</li><li>Keep refund and chargeback paths visible to the user.</li></ul>
+        <ul class="risk-list" id="riskList"></ul>
       </div>
     </section>
-
-    <section id="sources" class="section">
-      <h2>Source trail for the content pipeline</h2>
-      <div class="source-grid">
-        <article class="source-card"><h3>Trend evidence used</h3><ul><li>Newsletter signals: Agentic Banking Blueprint, AI Platform Bank, Stablecoin Payments Infrastructure.</li><li>LinkedIn feed: MiCA transition and AI sandbox/security posts.</li><li>Google News: ASEAN digital payments, embedded finance, and instant-payments growth.</li><li>Reddit/search: stablecoin payment infrastructure in practice.</li></ul></article>
-        <article class="source-card"><h3>Claims that still need final sourcing before publish</h3><ul><li>Network tokenisation and delegated credential examples.</li><li>Scheme liability and dispute treatment for agent-initiated payments.</li><li>Stablecoin redemption/finality rules under relevant frameworks.</li><li>Bank-rail controls for account-based delegated payments.</li></ul></article>
+    <section id="framework" class="section">
+      <div class="section-head"><div><div class="eyebrow">Four-layer frame</div><h2>Design the delegation stack</h2></div><p class="lead">Use this as the article spine and the LinkedIn carousel structure. Each layer answers a different product and risk question.</p></div>
+      <div class="framework-grid">
+        <article class="card frame"><div class="metric-icon"><i data-lucide="user-check"></i></div><h3>Authority</h3><p>Who instructed the agent, what scope was granted, and how can that scope be revoked?</p></article>
+        <article class="card frame"><div class="metric-icon"><i data-lucide="key-round"></i></div><h3>Credential</h3><p>Which credential is exposed to the agent, and is it single-use, merchant-bound, or wallet-bound?</p></article>
+        <article class="card frame"><div class="metric-icon"><i data-lucide="scale"></i></div><h3>Liability</h3><p>Who owns fraud, unauthorised activity, refunds, disputes, compliance holds, and operational errors?</p></article>
+        <article class="card frame"><div class="metric-icon"><i data-lucide="badge-check"></i></div><h3>Settlement</h3><p>When is the transfer final in the ledger, in law, and in the user’s practical recourse path?</p></article>
       </div>
     </section>
-
-    <footer class="footer"><span>Learn with Siva • Payments infrastructure explained</span><span>Static GitHub microsite candidate • localStorage learning gate</span></footer>
+    <section id="rails" class="section">
+      <div class="section-head"><div><div class="eyebrow">Neutral rail comparison</div><h2>Different rails, different constraints</h2></div><p class="lead">The point is not to crown a winner. Cards, bank rails, and stablecoins can all support delegated payments, but they place controls in different parts of the stack.</p></div>
+      <div class="compare">
+        <article class="card rail"><div class="rail-top"><h3>Card token</h3><i data-lucide="credit-card"></i></div><dl><div><dt>Strength</dt><dd>Acceptance + recourse</dd></div><div><dt>Control</dt><dd>Token scope, MCC, amount</dd></div><div><dt>Open question</dt><dd>Agent liability treatment</dd></div></dl></article>
+        <article class="card rail"><div class="rail-top"><h3>Bank rail</h3><i data-lucide="landmark"></i></div><dl><div><dt>Strength</dt><dd>Account ownership + regulated PSP controls</dd></div><div><dt>Control</dt><dd>Consent, beneficiary, release rules</dd></div><div><dt>Open question</dt><dd>Scam and misdirection recourse</dd></div></dl></article>
+        <article class="card rail"><div class="rail-top"><h3>Stablecoin wallet</h3><i data-lucide="coins"></i></div><dl><div><dt>Strength</dt><dd>Programmability + settlement-asset design</dd></div><div><dt>Control</dt><dd>Key custody, policy engine, compliance holds</dd></div><div><dt>Open question</dt><dd>Redemption and legal finality</dd></div></dl></article>
+      </div>
+    </section>
+    <section id="sources" class="section sources">
+      <article class="card source-card"><div class="eyebrow">Reference inspiration used</div><h3>What changed from the first draft</h3><ul><li><i data-lucide="check-circle"></i><span>Borrowed the ISO 20022 simulator structure: scenario selector, flow map, controls, and reference panel.</span></li><li><i data-lucide="check-circle"></i><span>Borrowed the ISO 8583 parser density: compact cards, technical labels, and explain-as-you-interact layout.</span></li><li><i data-lucide="check-circle"></i><span>Applied Learn with Siva tokens: warm cream canvas, slate ink, copper accent, DM Sans, Inter, JetBrains Mono.</span></li><li><i data-lucide="check-circle"></i><span>Added Lucide icons across navigation, gate, hero, simulator, rail cards, and source trail.</span></li></ul></article>
+      <article class="card source-card"><div class="eyebrow">Claim hygiene</div><h3>Before publication, source these precisely</h3><ul><li><i data-lucide="book-marked"></i><span>Network token controls and delegated credential treatment.</span></li><li><i data-lucide="book-marked"></i><span>Scheme liability and dispute handling for agent-initiated transactions.</span></li><li><i data-lucide="book-marked"></i><span>Bank-rail consent and fraud-loss allocation in relevant markets.</span></li><li><i data-lucide="book-marked"></i><span>Stablecoin redemption, reserve, freeze, and finality rules under applicable frameworks.</span></li></ul></article>
+    </section>
+    <footer class="footer"><span>Learn with Siva • Payments infrastructure explained</span><span>Static GitHub microsite • localStorage learning gate • Lucide icon system</span></footer>
   </main>
   <script>
-    const gate = document.getElementById('gate');
-    if(localStorage.getItem('lws-agentic-authority-gate') === 'ok') gate.classList.add('hidden');
-    document.getElementById('enterBtn').addEventListener('click', () => { localStorage.setItem('lws-agentic-authority-gate','ok'); gate.classList.add('hidden'); });
-    const data = {
-      card:{title:'Card token', text:'Best first fit when the agent needs existing merchant acceptance, spending controls, chargeback paths, and network fraud rules.', m:['86%','48%','82%'], v:['High','Medium','High'], risks:['Set merchant category and amount caps before the credential is provisioned.','Use network token controls instead of exposing the underlying PAN.','Keep refund and chargeback paths visible to the user.']},
-      bank:{title:'Bank rail', text:'Best fit when the agent needs regulated account movement, account ownership checks, PSP controls, and bank-side monitoring.', m:['62%','44%','66%'], v:['Medium','Medium','Medium'], risks:['Confirm the account owner and beneficiary before initiation.','Move fraud controls before payment release, not after settlement.','Design exception handling for misdirected or authorised-scam payments.']},
-      stablecoin:{title:'Stablecoin wallet', text:'Best fit when the agent needs programmable transfer and settlement-asset design, but redemption, reserves, and compliance controls matter.', m:['38%','88%','42%'], v:['Lower','High','Lower'], risks:['Define who controls the wallet key and policy engine.','Separate ledger finality from legal and redemption finality.','Plan compliance holds, blacklist treatment, and refund paths explicitly.']}
+    function icon(name){const i=document.createElement('i');i.setAttribute('data-lucide',name);return i}
+    const gate=document.getElementById('gate');
+    if(localStorage.getItem('lws-agentic-authority-gate-v2')==='ok') gate.classList.add('hidden');
+    document.getElementById('enterBtn').addEventListener('click',()=>{localStorage.setItem('lws-agentic-authority-gate-v2','ok');gate.classList.add('hidden')});
+    const choiceData={
+      card:{title:'Card token',text:'Best first fit when the agent needs existing merchant acceptance, spending controls, chargeback paths, and network fraud rules.',m:['86%','48%','82%'],v:['High','Medium','High'],risks:['Set merchant category and amount caps before the credential is provisioned.','Use network token controls instead of exposing the underlying PAN.','Keep refund and chargeback paths visible to the user.']},
+      bank:{title:'Bank rail',text:'Best fit when the agent needs regulated account movement, account ownership checks, PSP controls, and bank-side monitoring.',m:['62%','44%','66%'],v:['Medium','Medium','Medium'],risks:['Confirm the account owner and beneficiary before initiation.','Move fraud controls before payment release, not after settlement.','Design exception handling for misdirected or authorised-scam payments.']},
+      stablecoin:{title:'Stablecoin wallet',text:'Best fit when the agent needs programmable transfer and settlement-asset design, but redemption, reserves, and compliance controls matter.',m:['38%','88%','42%'],v:['Lower','High','Lower'],risks:['Define who controls the wallet key and policy engine.','Separate ledger finality from legal and redemption finality.','Plan compliance holds, blacklist treatment, and refund paths explicitly.']}
     };
-    document.querySelectorAll('.choice').forEach(btn => btn.addEventListener('click', () => {
-      document.querySelectorAll('.choice').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const d=data[btn.dataset.choice];
-      choiceTitle.textContent=d.title; choiceText.textContent=d.text; [m1.style.width,m2.style.width,m3.style.width]=d.m; [m1v.textContent,m2v.textContent,m3v.textContent]=d.v; riskList.innerHTML=d.risks.map(x=>`<li>${x}</li>`).join('');
-    }));
+    function renderRisks(items){riskList.replaceChildren(...items.map(x=>{const li=document.createElement('li');li.append(icon('triangle-alert'),document.createElement('span'));li.lastChild.textContent=x;return li}))}
+    renderRisks(choiceData.card.risks)
+    document.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.choice').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const d=choiceData[btn.dataset.choice];choiceTitle.textContent=d.title;choiceText.textContent=d.text;[m1.style.width,m2.style.width,m3.style.width]=d.m;[m1v.textContent,m2v.textContent,m3v.textContent]=d.v;renderRisks(d.risks);if(window.lucide)lucide.createIcons()}));
+    const scenarios={
+      retail:{policy:'merchant cap',credential:'network token',rail:'card network',liability:'chargeback path',badge:'Rail choice is downstream of authority design',note:'A retail agent usually starts with credential controls: merchant category, amount cap, refund path, and token scope.'},
+      travel:{policy:'dynamic limit',credential:'virtual card',rail:'card + wallet',liability:'refund chain',badge:'Travel exposes exceptions: holds, refunds, rebooking, and disputes',note:'A travel agent needs more than a payment button. It needs rules for deposits, delayed capture, cancellation, refunds, and supplier failure.'},
+      treasury:{policy:'approval matrix',credential:'custody policy',rail:'stablecoin / bank',liability:'ops + compliance',badge:'Treasury bots move the hard question into governance',note:'A treasury bot makes programmability attractive, but the constraint shifts to custody, approvals, compliance holds, redemption, and audit trails.'}
+    };
+    document.querySelectorAll('.tool-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tool-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const s=scenarios[btn.dataset.scenario];svgPolicy.textContent=s.policy;svgCredential.textContent=s.credential;svgRail.textContent=s.rail;svgLiability.textContent=s.liability;svgBadge.textContent=s.badge;scenarioNote.textContent=s.note;}));
+    window.addEventListener('load',()=>{if(window.lucide)lucide.createIcons()});
+    document.addEventListener('DOMContentLoaded',()=>{if(window.lucide)lucide.createIcons()});
   </script>
 </body>
 </html>
