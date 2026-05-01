@@ -11,7 +11,8 @@
     "2026-W19-linkedin-04"
   ],
   "github_pages_path": "/home/ubuntu/sivasub.github.io/agentic-payment-authority/index.html",
-  "expected_url": "https://siva-sub.github.io/agentic-payment-authority/",
+  "expected_url": "https://siva-sub.github.io/sivasub.github.io/agentic-payment-authority/",
   "gate_type": "learning_gate_localStorage_no_email_capture",
-  "status": "github_ready_pending_push_or_pushed_after_confirmation"
+  "status": "published_to_github_pages_verified_200",
+  "verified_at": "2026-05-01T14:48:09"
 }
