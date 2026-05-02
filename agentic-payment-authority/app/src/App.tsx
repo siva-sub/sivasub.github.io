@@ -1,16 +1,14 @@
 import { useState } from 'react';
 import {
-  Container, Tabs, Paper, Stack, Group, Text, Title, Badge, Table,
-  Accordion, RingProgress, SimpleGrid, Divider,
-  ScrollArea,
+  Container, Tabs, Paper, Stack, Group, Text, Badge, Table,
+  RingProgress, SimpleGrid, Divider, Transition, Title,
 } from '@mantine/core';
 import {
   IconCreditCard, IconBuildingBank, IconCoin,
-  IconArrowDown, IconCheck, IconAlertTriangle, IconBan,
-  IconExternalLink, IconBook, IconShieldCheck,
-  IconUser, IconBrandLinkedin,
+  IconArrowDown, IconBook, IconShieldCheck,
+  IconUser, IconBrandLinkedin, IconExternalLink,
 } from '@tabler/icons-react';
-import { LAYERS, RAILS, CLAIMS, SOURCES, type LayerKey } from './data';
+import { LAYERS, RAILS, SOURCES, type LayerKey } from './data';
 
 const RAIL_KEYS = ['card', 'bank', 'stablecoin'] as const;
 
@@ -43,8 +41,8 @@ function Hero() {
         Delegated Payment Authority
       </h1>
       <p className="hero-subtitle">
-        How AI agents get scoped authority to make payments — across card token, bank, and stablecoin rails. 
-        An interactive stack simulator built from Stripe SPT, Visa Intelligent Commerce, Mastercard Agent Pay, BIS CPMI, and BIS/FSB sources.
+        How AI agents get scoped authority to make payments — across card token, bank, and stablecoin rails.
+        Built from Stripe SPT, Visa Intelligent Commerce, Mastercard Agent Pay, BIS CPMI, BIS/FSB, and Google AP2 sources.
       </p>
     </section>
   );
@@ -64,7 +62,11 @@ function StackNode({
   return (
     <div
       className={`stack-node ${active ? 'active' : ''}`}
-      style={{ borderColor: active ? layer.border : undefined, background: active ? layer.bg : undefined }}
+      style={{
+        borderColor: active ? layer.border : undefined,
+        background: active ? layer.bg : undefined,
+        transition: 'all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1)',
+      }}
       onClick={onClick}
     >
       <div className="node-badge" style={{ background: layer.bg, color: layer.color, border: `1px solid ${layer.border}` }}>
@@ -104,7 +106,10 @@ function AuthorityStackSimulator() {
                 key={k}
                 value={k}
                 leftSection={RAIL_META[k].icon}
-                style={{ color: activeRail === k ? RAIL_META[k].color : undefined }}
+                style={{
+                  color: activeRail === k ? RAIL_META[k].color : undefined,
+                  transition: 'color 0.2s ease',
+                }}
               >
                 {RAILS[k].name}
               </Tabs.Tab>
@@ -132,43 +137,47 @@ function AuthorityStackSimulator() {
                   </div>
 
                   <div style={{ flex: 1, minWidth: 280 }}>
-                    <Paper className="detail-panel" withBorder={false}>
-                      {(() => {
-                        const layer = LAYERS.find((l) => l.key === selectedLayer)!;
-                        const node = RAILS[k].layers[selectedLayer];
-                        return (
-                          <Stack gap="sm">
-                            <Group gap="xs">
-                              <Badge
-                                size="sm"
-                                style={{
-                                  background: layer.bg,
-                                  color: layer.color,
-                                  border: `1px solid ${layer.border}`,
-                                  textTransform: 'uppercase',
-                                  fontFamily: "'JetBrains Mono',monospace",
-                                  fontWeight: 700,
-                                  fontSize: 10,
-                                  letterSpacing: 1,
-                                }}
-                              >
-                                {layer.label}
-                              </Badge>
-                              <Text size="xs" c="var(--ink-tertiary)">{node.title}</Text>
-                            </Group>
-                            <Divider color="var(--border-subtle)" />
-                            <Text size="sm" c="var(--ink-secondary)" lh={1.6}>{node.body}</Text>
-                            <Group gap="xs" mt="xs" wrap="wrap">
-                              {node.sources.map((s) => (
-                                <span key={s} className="source-pill">
-                                  <IconBook size={10} /> {s}
-                                </span>
-                              ))}
-                            </Group>
-                          </Stack>
-                        );
-                      })()}
-                    </Paper>
+                    <Transition mounted={true} transition="fade" duration={300}>
+                      {(styles) => (
+                        <Paper className="detail-panel" withBorder={false} style={styles}>
+                          {(() => {
+                            const layer = LAYERS.find((l) => l.key === selectedLayer)!;
+                            const node = RAILS[k].layers[selectedLayer];
+                            return (
+                              <Stack gap="sm">
+                                <Group gap="xs">
+                                  <Badge
+                                    size="sm"
+                                    style={{
+                                      background: layer.bg,
+                                      color: layer.color,
+                                      border: `1px solid ${layer.border}`,
+                                      textTransform: 'uppercase',
+                                      fontFamily: "'JetBrains Mono',monospace",
+                                      fontWeight: 700,
+                                      fontSize: 10,
+                                      letterSpacing: 1,
+                                    }}
+                                  >
+                                    {layer.label}
+                                  </Badge>
+                                  <Text size="xs" c="var(--ink-tertiary)">{node.title}</Text>
+                                </Group>
+                                <Divider color="var(--border-subtle)" />
+                                <Text size="sm" c="var(--ink-secondary)" lh={1.6}>{node.body}</Text>
+                                <Group gap="xs" mt="xs" wrap="wrap">
+                                  {node.sources.map((s) => (
+                                    <span key={s} className="source-pill">
+                                      <IconBook size={10} /> {s}
+                                    </span>
+                                  ))}
+                                </Group>
+                              </Stack>
+                            );
+                          })()}
+                        </Paper>
+                      )}
+                    </Transition>
                   </div>
                 </Group>
               </div>
@@ -189,110 +198,51 @@ function RailComparisonTable() {
         Rail Comparison
       </Title>
 
-      <ScrollArea type="auto">
-        <Table highlightOnHover withColumnBorders={false} withTableBorder={false}>
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: 'var(--ink-tertiary)', textTransform: 'uppercase', letterSpacing: 1 }}>Dimension</Table.Th>
-              {RAIL_KEYS.map((k) => (
-                <Table.Th key={k} style={{ fontFamily: "'DM Sans',sans-serif", fontWeight: 700, fontSize: 13 }}>
-                  <Group gap="xs">
-                    {RAIL_META[k].icon}
-                    {RAILS[k].name}
-                  </Group>
-                </Table.Th>
-              ))}
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>
-            {dimensions.map((dim) => (
-              <Table.Tr key={dim}>
-                <Table.Td style={{ fontWeight: 600, fontSize: 13 }}>{dim}</Table.Td>
-                {RAIL_KEYS.map((k) => {
-                  const value = RAILS[k].scores[dim];
-                  return (
-                    <Table.Td key={k}>
-                      <div className="score-ring-wrap">
-                        <RingProgress
-                          size={52}
-                          thickness={6}
-                          roundCaps
-                          sections={[{ value, color: getRingColor(value) }]}
-                          label={
-                            <Text size="10px" fw={700} ta="center">
-                              {value}%
-                            </Text>
-                          }
-                        />
-                        <div>
-                          <div className="score-sublabel">{RAILS[k].name}</div>
-                        </div>
-                      </div>
-                    </Table.Td>
-                  );
-                })}
-              </Table.Tr>
-            ))}
-          </Table.Tbody>
-        </Table>
-      </ScrollArea>
-    </Paper>
-  );
-}
-
-function ClaimBadge({ badge }: { badge: 'safe' | 'qualify' | 'do-not-say' }) {
-  const config = {
-    safe: { icon: <IconCheck size={12} />, label: 'Safe to say', cls: 'badge-safe' },
-    qualify: { icon: <IconAlertTriangle size={12} />, label: 'Qualify', cls: 'badge-qualify' },
-    'do-not-say': { icon: <IconBan size={12} />, label: 'Do not say', cls: 'badge-do-not-say' },
-  }[badge];
-
-  return (
-    <Badge
-      size="sm"
-      className={config.cls}
-      leftSection={config.icon}
-      style={{ fontFamily: "'JetBrains Mono',monospace", fontWeight: 700, fontSize: 10, textTransform: 'uppercase', letterSpacing: 0.5 }}
-    >
-      {config.label}
-    </Badge>
-  );
-}
-
-function ClaimValidationPanel() {
-  return (
-    <Paper className="brut-card" p="var(--space-5)" mb="var(--space-8)">
-      <Title order={3} mb="md" style={{ fontFamily: "'DM Sans',sans-serif", fontWeight: 800, fontSize: 20 }}>
-        What the sources actually support
-      </Title>
-      <Text size="sm" c="var(--ink-secondary)" mb="md">
-        Each claim below is rated against the primary sources. Click to expand the evidence.
-      </Text>
-
-      <Accordion variant="contained" chevronPosition="right">
-        {CLAIMS.map((claim) => (
-          <Accordion.Item key={claim.id} value={claim.id}>
-            <Accordion.Control>
-              <Group wrap="nowrap" gap="sm">
-                <ClaimBadge badge={claim.badge} />
-                <Text size="sm" fw={500} style={{ flex: 1, lineHeight: 1.4 }}>{claim.text}</Text>
-              </Group>
-            </Accordion.Control>
-            <Accordion.Panel>
-              <Stack gap="sm" py="xs">
-                <Text size="sm" c="var(--ink-secondary)" lh={1.6}>{claim.evidence}</Text>
-                <Group gap="xs" wrap="wrap">
-                  {claim.source.split(', ').map((s) => (
-                    <span key={s} className="source-pill">
-                      <IconExternalLink size={10} /> {s}
-                    </span>
-                  ))}
+      <Table highlightOnHover withColumnBorders={false} withTableBorder={false}>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: 'var(--ink-tertiary)', textTransform: 'uppercase', letterSpacing: 1 }}>Dimension</Table.Th>
+            {RAIL_KEYS.map((k) => (
+              <Table.Th key={k} style={{ fontFamily: "'DM Sans',sans-serif", fontWeight: 700, fontSize: 13 }}>
+                <Group gap="xs">
+                  {RAIL_META[k].icon}
+                  {RAILS[k].name}
                 </Group>
-              </Stack>
-            </Accordion.Panel>
-          </Accordion.Item>
-        ))}
-      </Accordion>
+              </Table.Th>
+            ))}
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
+          {dimensions.map((dim) => (
+            <Table.Tr key={dim}>
+              <Table.Td style={{ fontWeight: 600, fontSize: 13 }}>{dim}</Table.Td>
+              {RAIL_KEYS.map((k) => {
+                const value = RAILS[k].scores[dim];
+                return (
+                  <Table.Td key={k}>
+                    <div className="score-ring-wrap">
+                      <RingProgress
+                        size={52}
+                        thickness={6}
+                        roundCaps
+                        sections={[{ value, color: getRingColor(value) }]}
+                        label={
+                          <Text size="10px" fw={700} ta="center">
+                            {value}%
+                          </Text>
+                        }
+                      />
+                      <div>
+                        <div className="score-sublabel">{RAILS[k].name}</div>
+                      </div>
+                    </div>
+                  </Table.Td>
+                );
+              })}
+            </Table.Tr>
+          ))}
+        </Table.Tbody>
+      </Table>
     </Paper>
   );
 }
@@ -301,11 +251,8 @@ function SourceMap() {
   return (
     <Paper className="brut-card" p="var(--space-5)" mb="var(--space-8)">
       <Title order={3} mb="md" style={{ fontFamily: "'DM Sans',sans-serif", fontWeight: 800, fontSize: 20 }}>
-        Source Map
+        Authoritative Sources
       </Title>
-      <Text size="sm" c="var(--ink-secondary)" mb="md">
-        What each authoritative source actually supports, with direct citations.
-      </Text>
 
       <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="md">
         {SOURCES.map((src) => (
@@ -361,9 +308,6 @@ export default function App() {
         </div>
         <div className="full-width">
           <RailComparisonTable />
-        </div>
-        <div className="full-width">
-          <ClaimValidationPanel />
         </div>
         <div className="full-width">
           <SourceMap />

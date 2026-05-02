@@ -132,11 +132,13 @@ body::before {
 .stack-node:hover {
   transform: translateX(4px);
   box-shadow: 0 0 0 1px var(--border-emphasis);
+  background: var(--surface-1);
 }
 
 .stack-node.active {
   border-color: var(--accent-warm);
   background: var(--surface-1);
+  box-shadow: 0 2px 12px rgba(26,38,52,0.08);
 }
 
 .stack-node .node-badge {
@@ -223,21 +225,20 @@ body::before {
   color: var(--ink-tertiary);
 }
 
-/* Category pills for claims */
-.badge-safe { background: var(--success-subtle); color: var(--success); border: 1px solid rgba(46,125,50,0.25); }
-.badge-qualify { background: var(--warning-subtle); color: var(--warning); border: 1px solid rgba(239,108,0,0.25); }
-.badge-do-not-say { background: var(--error-subtle); color: var(--error); border: 1px solid rgba(198,40,40,0.25); }
-
 /* Source cards */
 .source-card {
   border: 1px solid var(--border-standard);
   border-radius: var(--radius-md);
   padding: var(--space-4);
   background: var(--surface-0);
-  transition: border-color 0.15s var(--ease);
+  transition: border-color 0.15s var(--ease), box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
 }
 
-.source-card:hover { border-color: var(--accent-warm); }
+.source-card:hover {
+  border-color: var(--accent-warm);
+  box-shadow: 0 2px 12px rgba(26,38,52,0.08);
+  transform: translateY(-1px);
+}
 
 .source-card h4 {
   font-family: 'DM Sans', sans-serif;
