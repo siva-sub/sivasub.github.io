@@ -96,7 +96,7 @@ function StackNode({
 function FlowVisualizer({ activeLayer }: { activeLayer: LayerKey }) {
   return (
     <div className="flow-viz">
-      {LAYERS.map((layer) => {
+      {LAYERS.map((layer, idx) => {
         const isActive = layer.key === activeLayer;
         return (
           <Tooltip key={layer.key} label={layer.description} withArrow multiline w={220}>
@@ -106,11 +106,22 @@ function FlowVisualizer({ activeLayer }: { activeLayer: LayerKey }) {
                 background: isActive ? layer.bg : 'var(--surface-1)',
                 borderColor: isActive ? layer.border : 'var(--border-subtle)',
                 color: isActive ? layer.color : 'var(--ink-tertiary)',
-                transition: 'all 0.3s var(--ease)',
+                transition: 'all 0.3s cubic-bezier(0.25, 1, 0.5, 1)',
+                animationDelay: `${idx * 60}ms`,
               }}
             >
               <span className="flow-viz-letter">{layer.short}</span>
               <span className="flow-viz-label">{layer.label}</span>
+              {isActive && (
+                <div style={{
+                  width: '60%',
+                  height: 2,
+                  borderRadius: 1,
+                  background: layer.color,
+                  marginTop: 4,
+                  transition: 'width 0.3s cubic-bezier(0.25, 1, 0.5, 1)',
+                }} />
+              )}
             </div>
           </Tooltip>
         );
@@ -521,7 +532,7 @@ function Footer() {
           </a>
         </Group>
         <Text size="xs" c="var(--ink-muted)">
-          Sources: Stripe SPT · Visa Intelligent Commerce · Mastercard Agent Pay · BIS CPMI · BIS/FSB · Google AP2
+          Sources: Stripe SPT · Visa Intelligent Commerce · BIS CPMI · FSB · Google Pay
         </Text>
       </Stack>
     </footer>

@@ -131,14 +131,15 @@ body::before {
 
 .stack-node:hover {
   transform: translateX(4px);
-  box-shadow: 0 0 0 1px var(--border-emphasis);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
   background: var(--surface-1);
 }
 
 .stack-node.active {
   border-color: var(--accent-warm);
   background: var(--surface-1);
-  box-shadow: 0 2px 12px rgba(26,38,52,0.08);
+  box-shadow: 0 2px 8px rgba(26,38,52,0.06), 0 8px 24px rgba(26,38,52,0.06);
+  animation: scaleIn 0.25s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .stack-node .node-badge {
@@ -168,6 +169,22 @@ body::before {
   color: var(--ink-muted);
   font-size: 12px;
   line-height: 1;
+  padding: 2px 0;
+  position: relative;
+}
+.stack-arrow::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 12px;
+  background: var(--border-standard);
+  margin: 0 auto;
+  border-radius: 1px;
+}
+.stack-arrow svg {
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.05));
 }
 
 /* Detail panel */
@@ -296,12 +313,31 @@ body::before {
 ::-webkit-scrollbar-thumb { background: var(--border-emphasis); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--ink-muted); }
 
-/* Animations */
+/* Animations — motion design system */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(8px); filter: blur(2px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.fade-in { animation: fadeIn 0.25s var(--ease); }
+@keyframes subtlePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(193,154,138,0); }
+  50% { box-shadow: 0 0 0 4px rgba(193,154,138,0.15); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+.fade-in { animation: fadeIn 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+.slide-up { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.scale-in { animation: scaleIn 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+
+/* Subtle pulse on active flow blocks */
+.flow-viz-block.active {
+  animation: subtlePulse 2.5s ease-in-out infinite;
+}
 
 /* Mantine overrides */
 .mantine-Tabs-tab[data-active] {
@@ -383,8 +419,8 @@ html, body { color-scheme: light; }
 }
 
 .flow-viz-block.active {
+  /* animation: subtlePulse defined in Animations section above */
   transform: scale(1.05);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .flow-viz-block:hover {
