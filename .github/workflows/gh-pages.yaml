@@ -33,9 +33,10 @@ jobs:
       - name: Build static microsite artifact
         run: |
           rm -rf public
-          mkdir -p public
-          cp -R agentic-payment-authority public/agentic-payment-authority
-          printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=./agentic-payment-authority/"><title>Learn with Siva</title><a href="./agentic-payment-authority/">Delegated Payment Authority Lab</a>' > public/index.html
+          mkdir -p public/agentic-payment-authority
+          cp agentic-payment-authority/index.html public/agentic-payment-authority/
+          cp -R agentic-payment-authority/assets public/agentic-payment-authority/assets
+          printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=./agentic-payment-authority/"><title>Learn with Siva</title><a href="./agentic-payment-authority/">Delegated Payment Authority Explorer</a>' > public/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
