@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/agentic-payment-authority/',
+  base: '/sivasub.github.io/agentic-payment-authority/',
 })
