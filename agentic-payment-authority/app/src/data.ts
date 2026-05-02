@@ -7,14 +7,15 @@ export interface Layer {
   color: string;
   bg: string;
   border: string;
+  description: string;
 }
 
 export const LAYERS: Layer[] = [
-  { key: 'mandate', label: 'Mandate', short: 'M', color: '#8B5CF6', bg: 'rgba(139,92,246,0.12)', border: 'rgba(139,92,246,0.35)' },
-  { key: 'credential', label: 'Credential', short: 'C', color: '#3B82F6', bg: 'rgba(59,130,246,0.12)', border: 'rgba(59,130,246,0.35)' },
-  { key: 'authorization', label: 'Authorization', short: 'A', color: '#22C55E', bg: 'rgba(34,197,94,0.12)', border: 'rgba(34,197,94,0.35)' },
-  { key: 'settlement', label: 'Settlement', short: 'S', color: '#F59E0B', bg: 'rgba(245,158,11,0.12)', border: 'rgba(245,158,11,0.35)' },
-  { key: 'recourse', label: 'Recourse', short: 'R', color: '#EF4444', bg: 'rgba(239,68,68,0.12)', border: 'rgba(239,68,68,0.35)' },
+  { key: 'mandate', label: 'Mandate', short: 'M', color: '#8B5CF6', bg: 'rgba(139,92,246,0.12)', border: 'rgba(139,92,246,0.35)', description: 'The intent to pay, scoped to merchant, amount, and time' },
+  { key: 'credential', label: 'Credential', short: 'C', color: '#3B82F6', bg: 'rgba(59,130,246,0.12)', border: 'rgba(59,130,246,0.35)', description: 'A scoped grant — not a raw PAN — with limits, TTL, and revoke' },
+  { key: 'authorization', label: 'Authorization', short: 'A', color: '#22C55E', bg: 'rgba(34,197,94,0.12)', border: 'rgba(34,197,94,0.35)', description: 'Real-time check that token scope matches the transaction' },
+  { key: 'settlement', label: 'Settlement', short: 'S', color: '#F59E0B', bg: 'rgba(245,158,11,0.12)', border: 'rgba(245,158,11,0.35)', description: 'Final transfer of funds: deferred for card, real-time for stablecoin' },
+  { key: 'recourse', label: 'Recourse', short: 'R', color: '#EF4444', bg: 'rgba(239,68,68,0.12)', border: 'rgba(239,68,68,0.35)', description: 'Recovery path: chargebacks for cards, recall for bank, redemption for stablecoin' },
 ];
 
 export interface RailData {
@@ -75,7 +76,7 @@ export const RAILS: Record<string, RailData> = {
     layers: {
       mandate: {
         title: 'Consent object → payer + beneficiary',
-        body: 'The mandate is a consent object registered with the payer’s bank or PSP. It names the beneficiary, the purpose, and the maximum liability. In fast-payment schemes, consent can be one-off or recurring with explicit payer confirmation.',
+        body: 'The mandate is a consent object registered with the payer\'s bank or PSP. It names the beneficiary, the purpose, and the maximum liability. In fast-payment schemes, consent can be one-off or recurring with explicit payer confirmation.',
         sources: ['BIS CPMI', 'Google AP2'],
       },
       credential: {
@@ -95,7 +96,7 @@ export const RAILS: Record<string, RailData> = {
       },
       recourse: {
         title: 'Recall path → scheme + payee action',
-        body: 'Recourse is a recall request through the scheme. Success depends on the payee’s bank and whether funds have been moved. BIS CPMI notes recall limits: once a fast payment is settled, recovery is not guaranteed.',
+        body: 'Recourse is a recall request through the scheme. Success depends on the payee\'s bank and whether funds have been moved. BIS CPMI notes recall limits: once a fast payment is settled, recovery is not guaranteed.',
         sources: ['BIS CPMI'],
       },
     },
@@ -172,7 +173,7 @@ export const CLAIMS: Claim[] = [
     id: 'c2',
     text: 'Bank rails provide real-time settlement with guaranteed post-payment recourse.',
     badge: 'do-not-say',
-    evidence: 'BIS CPMI explicitly notes recall limits in fast-payment systems. Once funds are settled, recovery depends on the payee’s bank and is not guaranteed. Recourse score is 42% compared to 82% for card rails.',
+    evidence: 'BIS CPMI explicitly notes recall limits in fast-payment systems. Once funds are settled, recovery depends on the payee\'s bank and is not guaranteed. Recourse score is 42% compared to 82% for card rails.',
     source: 'BIS CPMI',
   },
   {
@@ -205,35 +206,91 @@ export const CLAIMS: Claim[] = [
   },
 ];
 
-export const SOURCES = [
+export interface SourceInfo {
+  name: string;
+  full: string;
+  supports: string;
+  note: string;
+  url: string;
+}
+
+export const SOURCES: SourceInfo[] = [
   {
     name: 'Stripe SPT',
     full: 'Stripe Secure Payment Tokens',
     supports: 'Scoped grants with amount caps, merchant binding, usage limits, TTL, revoke, and 3DS step-up.',
     note: 'Production API available. Best-in-class credential scoping for agentic payments.',
+    url: 'https://docs.stripe.com/api/payment-intents',
   },
   {
     name: 'Visa / MC',
     full: 'Visa Intelligent Commerce & Mastercard Agent Pay',
     supports: 'Agent-specific tokens, passkey identifiers, commerce signals, network-level dispute rails.',
     note: 'Network-native capabilities. Strong authorization match and post-payment recourse via chargeback.',
+    url: 'https://usa.visa.com/visa-everywhere/innovation/intelligent-commerce.html',
   },
   {
     name: 'BIS CPMI',
     full: 'Bank for International Settlements — Committee on Payments and Market Infrastructures',
     supports: 'Fast-payment finality models (RTS vs DNS), recall limits, fraud-control placement guidance.',
     note: 'Authoritative on settlement risk and recall constraints in real-time payment systems.',
+    url: 'https://www.bis.org/cpmi/',
   },
   {
     name: 'Google AP2',
     full: 'Google Accounts Payable API (AP2) / PayOps product patterns',
     supports: 'Consent object design, payer–beneficiary binding, upstream fraud screening.',
     note: 'Product pattern emphasis: fraud controls must precede payment release.',
+    url: 'https://pay.google.com/about/business/',
   },
   {
     name: 'BIS/FSB',
     full: 'BIS / Financial Stability Board',
     supports: 'Token rails for cross-border payment innovation; ledger finality; compliance layering.',
     note: 'Recognizes programmability advantages, but flags that delegated-wallet standards and liability remain immature.',
+    url: 'https://www.bis.org/fsb/',
+  },
+];
+
+export const SOURCE_URLS: Record<string, string> = {
+  'Stripe SPT': 'https://docs.stripe.com/api/payment-intents',
+  'Visa / MC': 'https://usa.visa.com/visa-everywhere/innovation/intelligent-commerce.html',
+  'BIS CPMI': 'https://www.bis.org/cpmi/',
+  'Google AP2': 'https://pay.google.com/about/business/',
+  'BIS/FSB': 'https://www.bis.org/fsb/',
+  'Product rule': '',
+  'Open issue': '',
+};
+
+export const LEARN_STEPS = [
+  {
+    layer: 'mandate',
+    title: 'Mandate — the intent to pay',
+    body: 'Before any money moves, the payer must express intent. In card rails this is a passkey-approved instruction. In bank rails it is a consent object. In stablecoin rails it is a wallet policy. The mandate is always scoped: it names a beneficiary, a purpose, and a maximum liability. Without a mandate, the rest of the stack has no authority to act.',
+    sources: ['Stripe SPT', 'BIS CPMI', 'BIS/FSB'],
+  },
+  {
+    layer: 'credential',
+    title: 'Credential — the scoped grant',
+    body: 'The credential is not a raw password or PAN. It is a scoped, revocable grant: limited to a merchant category, a maximum amount, a usage count, and a TTL. Stripe SPT pioneered this pattern. Visa and Mastercard now issue agent-specific tokens with passkey binding. The credential is the leash that keeps the agent within bounds.',
+    sources: ['Stripe SPT', 'Visa / MC', 'Google AP2'],
+  },
+  {
+    layer: 'authorization',
+    title: 'Authorization — the real-time match',
+    body: 'Authorization checks that the transaction request fits inside the credential scope. The network or PSP runs velocity checks, fraud screens, and step-up flows. For cards this is a network authorization. For bank rails it is a PSP fraud screen. For stablecoins it is a compliance layer with sanctions and KYC checks. Authorization is the gatekeeper.',
+    sources: ['Visa / MC', 'BIS CPMI', 'BIS/FSB'],
+  },
+  {
+    layer: 'settlement',
+    title: 'Settlement — the final transfer',
+    body: 'Settlement is when money actually moves. Cards authorize instantly but settle in batch (T+1). Bank rails settle in real-time (RTGS) or deferred batches (DNS). Stablecoins settle on the ledger itself: once the transaction is confirmed, finality is immediate and programmable. Settlement is the point of no return.',
+    sources: ['Visa / MC', 'BIS CPMI', 'BIS/FSB'],
+  },
+  {
+    layer: 'recourse',
+    title: 'Recourse — the recovery path',
+    body: 'Recourse is what happens when something goes wrong. Cards have mature chargeback rails and dispute lanes. Bank rails have recall requests through the scheme, but recovery is not guaranteed once funds are settled. Stablecoins depend on issuer redemption or legal claims; there is no chargeback rail. Recourse maturity is the biggest gap in emerging rails.',
+    sources: ['Visa / MC', 'Stripe SPT', 'BIS CPMI', 'BIS/FSB'],
   },
 ];
